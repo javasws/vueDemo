@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>属性绑定</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<a href="http://www.qq.com">qq</a>
+<div id="app">
+    <a v-bind:href="url">qq</a>
+    <a :href="url">qq</a>
+</div>
+<script type="text/javascript">
+    new Vue({
+        //vue示例容器,定义根节点
+        el: '#app',
+        //数据模型
+        data: {
+            /**
+             * 和html一起演示属性绑定，不支持双花括号形式绑定属性
+             * v-bind可以省略，但是冒号和被绑定的属性名不可以省略
+             */
+            url: "http://www.qq.com"
+        }
+    });
+</script>
+</body>
+</html>

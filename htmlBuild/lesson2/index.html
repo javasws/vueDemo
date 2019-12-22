@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>文本绑定</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{text}}</p>
+    <p v-text="text"></p>
+    <p v-text="xss"></p>
+    <p v-html="xss"></p>
+</div>
+<script>
+    // 演示 {{}}和 v-text的区别
+    setTimeout(function () {
+        var script = document.createElement('script');
+        script.src = 'app.js';
+        document.body.appendChild(script);
+    }, 2000);
+    //还演示了v-text和v-html的区别
+</script>
+<!--<script src="app.js"></script>-->
+</body>
+</html>

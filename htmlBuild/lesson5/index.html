@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>计算属性</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <a :href="getUrl('test')">{{getUrl('test')}}</a>
+    <a :href="url">{{url}}</a>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        //vue示例容器,定义根节点
+        el: '#app',
+        //数据模型
+        data: {
+            protocol: 'http:',
+            host: 'www.qq.com'
+        },
+        methods: {
+            getUrl: function (hash) {
+                return this.protocol + "//" + this.host + "#" + hash;
+            }
+            // 箭头函数会将this指向上层对象。
+            // getUrl: hash=>{
+            //    console.log(this);
+            //    return this.protocol + "//" + this.host + "#" + hash;
+            // }
+        },
+        // 这个里面的方法当依赖条件（两个变量）没有变化只会被调用一次
+        computed: {
+            // url: function () {
+            //     return this.protocol + "//" + this.host;
+            // }
+            url: {
+                get: function () {
+                    return this.protocol + "//" + this.host;
+                },
+                //加了set可以进行赋值操作 如执行vm.url="https://baidu.com"
+                set: function (val) {// 可以进行动态设置值
+                    var tmp = val.split("//");
+                    if (tmp.length > 1) {
+                        this.protocol = tmp[0];
+                        this.host = tmp[1];
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
