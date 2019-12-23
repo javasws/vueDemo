@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>监听器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <a :href="url">{{url}}</a>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        //vue示例容器,定义根节点
+        el: '#app',
+        //数据模型
+        data: {
+            location: {
+                protocol: 'http:',
+                host: 'www.qq.com'
+            },
+            url: ''
+            // },
+            // watch: {
+            //     location: {
+            //         immediate: true,
+            //         deep: true,//使递归的遍历对象和json，否则引用对象会因为引用地址不变不触发
+            //         handler: function (newValue, oldValue) {
+            //             this.url = newValue.protocol + "//" + newValue.host;
+            //         }
+            //     }
+        }
+    });
+    // vue中带$的方法都是实例方法，实例监听器写在这外面和写在里面作用是一样的。
+    var unwatch = vm.$watch('location', function (newValue, oldValue) {
+        this.url = newValue.protocol + "//" + newValue.host;
+
+    }, {
+        deep: true,
+        immediate: true
+    });
+    unwatch();// 移除监听器
+</script>
+</body>
+</html>

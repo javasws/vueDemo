@@ -9,7 +9,6 @@
 </head>
 <body>
 <div id="app">
-    <a :href="getUrl('test')">{{getUrl('test')}}</a>
     <a :href="url">{{url}}</a>
 </div>
 <script type="text/javascript">
@@ -21,17 +20,7 @@
             protocol: 'http:',
             host: 'www.qq.com'
         },
-        methods: {
-            getUrl: function (hash) {
-                return this.protocol + "//" + this.host + "#" + hash;
-            }
-            // 箭头函数会将this指向上层对象。
-            // getUrl: hash=>{
-            //    console.log(this);
-            //    return this.protocol + "//" + this.host + "#" + hash;
-            // }
-        },
-        // 这个里面的方法当依赖条件（两个变量）没有变化只会被调用一次
+        // 计算属性：这个里面的方法当依赖条件（这里是两个变量）没有变化只会被调用一次
         computed: {
             // url: function () {
             //     return this.protocol + "//" + this.host;

@@ -22,11 +22,16 @@
             url: ''
         },
         watch: {
-            protocol: function (newValue, oldValue) {
-                this.url = this.protocol + "//" + this.host;
+            protocol: {
+                immediate: true,// 可以在初始化时执行handler
+                handler: function (newValue, oldValue) {
+                    //有了这个函数控制台执行 vm.protocol="https:" 可以看到url变化
+                    this.url = this.protocol + "//" + this.host;
+                }
             }
         }
     });
+
 </script>
 </body>
 </html>
